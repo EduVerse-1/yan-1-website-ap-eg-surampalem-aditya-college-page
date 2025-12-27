@@ -97,6 +97,11 @@
     text-decoration:underline;
     word-break:break-all;
   }
+  .description{                      /* NEW: description styling */
+    font-size:.85em;
+    color:#94a3b8;
+    margin-top:6px;
+  }
 
   /* ---------- ACTIONS ---------- */
   .card-actions{
@@ -225,6 +230,36 @@ function getArchiveThumbnail(url){
   return `https://archive.org/services/img/${id}`;
 }
 
+function getArchiveId(url){
+  if (!url || !url.includes("archive.org/details/")) return null;
+  const part = url.split("/details/")[1];
+  return part.split(/[/?#]/)[0];
+}
+
+/* ------------------- FETCH DESCRIPTION ------------------- */
+async function fetchDescription(item, el){
+  const id = getArchiveId(item.archive_url);
+  if (!id){ el.textContent = 'Description not available.'; return; }
+  try{
+    const resp = await fetch(`https://archive.org/metadata/${id}`);
+    const data = await resp.json();
+    const raw = data?.metadata?.description;
+    let txt = '';
+    if (raw){
+      txt = Array.isArray(raw) ? raw.join(' ') : raw;
+    }
+    if (!txt){ el.textContent = 'Description not available.'; return; }
+    // strip HTML tags, collapse whitespace
+    txt = txt.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    const maxLen = 300;
+    if (txt.length > maxLen) txt = txt.slice(0,maxLen).trim() + '…';
+    el.textContent = txt;
+  }catch(e){
+    console.warn('Failed to fetch description for', id, e);
+    el.textContent = 'Description not available.';
+  }
+}
+
 /* ------------------- CARD CREATION ------------------- */
 function showCard(item){
   const container = document.querySelector(`#${item.type?.toLowerCase()} .cards`);
@@ -247,15 +282,23 @@ function showCard(item){
     </div>
   `;
 
-  // ----- tiny share‑icon (top‑right) -----
+  /* tiny share‑icon (top‑right) */
   const shareIcon = document.createElement("span");
   shareIcon.className = "share-icon";
   shareIcon.title     = "Share";
-  shareIcon.textContent = "🔗";                // any tiny symbol you prefer
+  shareIcon.textContent = "🔗";
   shareIcon.onclick   = () => shareCard(cardId);
   card.appendChild(shareIcon);
 
-  // ----- OPEN -----
+  /* Insert description element before actions */
+  const descEl = document.createElement('p');
+  descEl.className = 'description';
+  descEl.textContent = 'Loading description…';
+  const actions = card.querySelector('.card-actions');
+  actions.parentNode.insertBefore(descEl, actions);
+  fetchDescription(item, descEl);
+
+  /* OPEN button */
   card.querySelector(".btn-open").onclick = () => openViewer(item.archive_url);
 
   container.appendChild(card);
@@ -277,12 +320,12 @@ async function loadData(){
     const resp = await fetch(backendURL);
     allItems   = await resp.json();
 
-    // render every tab entirely – guarantees that a shared link will always be found
+    // render all tabs
     loadAllItems("acet");
     loadAllItems("aec");
     loadAllItems("agbs");
 
-    // after cards are on the page, see whether we arrived via a shared link
+    // after cards are on the page, see if a shared link exists
     handleSharedLink();
   }catch(e){
     console.error(e);
@@ -334,18 +377,16 @@ function handleSharedLink(){
   const gridId = params.get("grid_id");
   if (!gridId) return;
 
-  // find the item so we know which tab to open
   const targetItem = allItems.find(i=>`grid_${i.id}`===gridId);
   if (!targetItem) return;
 
   const targetTab = targetItem.type?.toLowerCase();
   if (!targetTab) return;
 
-  // activate its tab and make sure cards are rendered
   switchTab(targetTab);
   loadAllItems(targetTab);
 
-  // after DOM paint, scroll to the card and auto‑open it
+  // after DOM paint, scroll to card and auto‑open it
   setTimeout(()=>{
     const card = document.getElementById(gridId);
     if (!card) return;
