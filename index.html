@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ADITYA CAMPUS</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top left, #0f172a, #1e293b);
-      color: #f1f5f9;
-      min-height: 100vh;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      scroll-behavior: smooth;
+    /* ----- Base ----- */
+    body{
+      font-family:'Poppins',sans-serif;
+      background:radial-gradient(circle at top left,#0f172a,#1e293b);
+      color:#f1f5f9;
+      min-height:100vh;
+      overflow-x:hidden;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      scroll-behaviour:smooth;
     }
 
-    /* Glassmorphism */
-    .glass {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease-in-out;
+    /* ----- Glass‑morphology ----- */
+    .glass{
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:1rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+      transition:all .3s ease-in-out;
     }
-    .glass:hover {
-      transform: scale(1.01);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    }
+    .glass:hover{transform:scale(1.01);box-shadow:0 15px 35px rgba(0,0,0,.5);}
 
-    /* Fade & glow effects */
-    .fade-in { opacity: 0; transform: translateY(15px); animation: fadeIn 0.9s ease-in-out forwards; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-    .glow-text {
-      text-shadow: 0 0 10px #38bdf8, 0 0 20px #3b82f6, 0 0 40px #2563eb;
-      animation: glow 3s ease-in-out infinite alternate;
+    /* ----- Animations ----- */
+    .fade-in{opacity:0;transform:translateY(15px);animation:fadeIn .9s ease-in-out forwards;}
+    @keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
+    .glow-text{
+      text-shadow:0 0 10px #38bdf8,0 0 20px #3b82f6,0 0 40px #2563eb;
+      animation:glow 3s ease-in-out infinite alternate;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #3b82f6; }
-      to { text-shadow: 0 0 25px #60a5fa, 0 0 50px #3b82f6; }
-    }
-    .moving-text { animation: moveText 5s linear infinite; }
-    @keyframes moveText { 0%{transform:translateX(-10px);} 50%{transform:translateX(10px);} 100%{transform:translateX(-10px);} }
+    @keyframes glow{from{text-shadow:0 0 10px #3b82f6;}to{text-shadow:0 0 25px #60a5fa,0 0 50px #3b82f6;}}
+    .moving-text{animation:moveText 5s linear infinite;}
+    @keyframes moveText{0%{transform:translateX(-10px);}50%{transform:translateX(10px);}100%{transform:translateX(-10px);}}
 
-    iframe { width:100%; border:none; border-radius:1rem; overflow:hidden; background:#0f172a; }
 
-    /* Ultra‑slim train animation */
-    .train-container { position:relative; width:100%; height:26px; perspective:1000px; overflow:hidden;
-        background:linear-gradient(180deg,#0f172a 0%,#1e293b 80%,#111827 100%);
-        border-radius:.75rem; box-shadow:inset 0 0 20px rgba(59,130,246,.3); }
-    .train-track { position:absolute; bottom:5px; left:0; width:100%; height:2px;
-        background:repeating-linear-gradient(90deg,#60a5fa 0 20px,transparent 20px 40px);
-        animation:trackMove 1.5s linear infinite; }
-    @keyframes trackMove{ from{background-position-x:0;} to{background-position-x:40px;} }
-    .train { position:absolute; bottom:8px; left:-150px; display:flex; transform:rotateY(8deg);
-        animation:trainMove 9s linear infinite; }
-    @keyframes trainMove{ 0%{left:-160px;} 50%{left:calc(100%‑100px);} 100%{left:-160px;} }
-    .car { width:60px; height:15px; background:linear-gradient(to bottom right,#3b82f6,#2563eb);
-        margin:0 4px; border-radius:4px; position:relative; box-shadow:0 3px 8px rgba(37,99,235,.4);
-        transform:skewX(-5deg); }
-    .wheel { position:absolute; bottom:-4px; width:6px; height:6px; background:#1e293b;
-        border:2px solid #38bdf8; border-radius:50%; animation:wheelSpin .5s linear infinite; }
+    /* ----- Deep‑light train (kept from original) ----- */
+    .train-container{position:relative;width:100%;height:26px;perspective:1000px;overflow:hidden;
+      background:linear-gradient(180deg,#0f172a,#1e293b 80%,#111827);border-radius:.75rem;
+      box-shadow:inset 0 0 20px rgba(59,130,246,.3);}
+    .train-track{position:absolute;bottom:5px;left:0;width:100%;height:2px;
+      background:repeating-linear-gradient(90deg,#60a5fa 0 20px,transparent 20px 40px);
+      animation:trackMove 1.5s linear infinite;}
+    @keyframes trackMove{from{background-position-x:0;}to{background-position-x:40px;}}
+    .train{position:absolute;bottom:8px;left:-150px;display:flex;transform:rotateY(8deg);
+      animation:trainMove 9s linear infinite;}
+    @keyframes trainMove{0%{left:-160px;}50%{left:calc(100%-100px);}100%{left:-160px;}}
+    .car{width:60px;height:15px;background:linear-gradient(to bottom right,#3b82f6,#2563eb);
+      margin:0 4px;border-radius:4px;position:relative;box-shadow:0 3px 8px rgba(37,99,235,.4);
+      transform:skewX(-5deg);}
+    .wheel{position:absolute;bottom:-4px;width:6px;height:6px;background:#1e293b;
+      border:2px solid #38bdf8;border-radius:50%;animation:wheelSpin .5s linear infinite;}
     .wheel.left{left:5px;} .wheel.right{right:5px;}
-    @keyframes wheelSpin{ 100%{transform:rotate(360deg);} }
+    @keyframes wheelSpin{100%{transform:rotate(360deg);}}
+    @media(max-width:640px){
+      h1{font-size:1.8rem;}h2{font-size:1.25rem;}
+      .train-container{height:22px;}.car{width:50px;height:12px;}
+    }
 
-    /* mobile adjustments */
-    @media(max-width:640px){ h1{font-size:1.8rem;} h2{font-size:1.25rem;}
-      iframe{height:350px!important;} .train-container{height:22px;}
-      .car{width:50px;height:12px;} }
 
     /* ----- Full‑screen button ----- */
     .fullScreenBtn{
-      position:absolute; top:8px; right:8px;
-      background:rgba(255,255,255,.1); color:#fff; font-size:1.2rem;
-      padding:4px; cursor:pointer; border:none; border-radius:4px;
-      transition:background .2s; z-index:2;
+      position:absolute;top:8px;right:8px;
+      background:rgba(255,255,255,.1);color:#fff;font-size:1.2rem;
+      padding:4px;cursor:pointer;border:none;border-radius:4px;
+      transition:background .2s;z-index:2;
     }
-    .fullScreenBtn:hover{ background:rgba(255,255,255,.2); }
+    .fullScreenBtn:hover{background:rgba(255,255,255,.2);}
 
-    /* ----- Full‑screen overlay ----- */
-    #fullscreenOverlay {
-      position:fixed; inset:0; z-index:1000; display:none;
-      flex-direction:column; background:rgba(0,0,0,.9);
+
+    /* ----- Full‑screen overlay (no grid) ----- */
+    #fullscreenOverlay{
+      position:fixed;top:0;left:0;right:0;bottom:0;
+      background:#111;color:#f1f5f9;
+      z-index:1000;display:none;overflow:auto;
+      padding:2rem;
     }
-    #fullscreenOverlay.show { display:flex; } /* Tailwind .show instead of .hidden */
+    #fullscreenOverlay.show{display:block;}
 
+    #fullscreenOverlay .closeBtn{
+      position:fixed;top:1rem;right:1rem;
+      background:rgba(255,255,255,.2);color:#fff;
+      border:none;padding:.5rem .75rem;
+      font-size:1.5rem;cursor:pointer;border-radius:.25rem;
+      z-index:9999;
+    }
+    #fullscreenOverlay .closeBtn:hover{background:rgba(255,255,255,.4);}
   </style>
 </head>
 
@@ -103,10 +108,9 @@
   <header class="text-center fade-in mt-6">
     <h1 class="text-4xl sm:text-5xl font-bold text-blue-400 glow-text flex justify-center items-center space-x-2">
       <span>🏫</span>
-      <span style="font-family:'Pacifico', cursive;">ADITYA CAMPUS</span>
+      <span style="font-family:'Pacifico',cursive;">ADITYA CAMPUS</span>
       <span>🚀</span>
     </h1>
-
     <p class="text-slate-400 text-sm sm:text-base mt-3 moving-text">
       💖 Your satisfaction and privacy are our priority. Thanks for trusting our app!
     </p>
@@ -119,7 +123,8 @@
   <section id="about" class="w-full max-w-5xl glass p-6 fade-in relative">
     <h2 class="text-2xl font-semibold text-blue-300 mb-4">📘 ABOUT</h2>
     <button class="fullScreenBtn" data-src="aditya_type_frontend.html" title="Open in full screen">🔳</button>
-    <iframe src="aditya_type_frontend.html" class="h-[450px] bg-slate-900"></iframe>
+    <!-- The iframe below is kept for the normal view -->
+    <iframe src="aditya_type_frontend.html" class="h-[450px] bg-slate-900 mt-4"></iframe>
   </section>
 
   <!-- SECTION 2: ADITYA VERSE DISPLAY + MINI TRAIN -->
@@ -137,8 +142,8 @@
       </div>
     </div>
 
-    <!-- Embedded ADITYA Display -->
-    <iframe src="aditya_displaying_frontend.html" class="h-[500px] bg-slate-900"></iframe>
+    <!-- Embedded ADITYA Display (normal view) -->
+    <iframe src="aditya_displaying_frontend.html" class="h-[500px] bg-slate-900 mt-2"></iframe>
   </section>
 
   <!-- FOOTER -->
@@ -146,37 +151,85 @@
     <p>© 2025 ADITYA CAMPUS · Built with ❤️ by <span class="text-blue-400 font-semibold">YAN</span></p>
   </footer>
 
-  <!-- Fullscreen Overlay -->
+  <!-- ---- Full‑screen Overlay (no iframe / no grid) ---- -->
   <div id="fullscreenOverlay" class="show:hidden">
-    <div class="flex items-center justify-end p-4">
-      <button id="closeFullscreen" class="text-white text-2xl hover:text-gray-300" title="Close fullscreen">&times;</button>
-    </div>
-    <iframe id="fullscreenIframe" class="flex-grow w-full h-full border-none" src=""></iframe>
+    <button id="closeFullscreen" class="closeBtn" title="Close Full‑screen">&times;</button>
+    <div id="fullscreenContent" class="pt-12"></div>
   </div>
 
   <script>
-    /* Open an iframe in fullscreen overlay */
-    function openFullScreen(src) {
-      const overlay = document.getElementById('fullscreenOverlay');
-      const iframe  = document.getElementById('fullscreenIframe');
-      iframe.src = src;
-      overlay.classList.remove('hidden'); // Tailwind hidden removed
-      overlay.classList.add('show');      // custom class to display flex
+  /* ------------------------------------------------------------------
+   *  Full‑screen helper – fetch the page and display it in true full‑screen.
+   *  ------------------------------------------------------------------ */
+  (function () {
+    const overlay = document.getElementById('fullscreenOverlay');
+    const content  = document.getElementById('fullscreenContent');
+    const closeBtn = document.getElementById('closeFullscreen');
+
+    /**
+     * Request full‑screen on an element (cross‑browser)
+     * @param {HTMLElement} el
+     */
+    function requestFull(el){
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
     }
 
-    /* Close the overlay */
-    document.getElementById('closeFullscreen').addEventListener('click', () => {
-      const overlay = document.getElementById('fullscreenOverlay');
-      const iframe  = document.getElementById('fullscreenIframe');
-      overlay.classList.add('hidden');
+    /**
+     * Exit full‑screen mode
+     */
+    function exitFull(){
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    }
+
+    /**
+     * Open the requested page in full‑screen overlay.
+     * @param {string} src URL of the page to load
+     */
+    function openFullScreen(src){
+      // 1. Fetch the page (text)
+      fetch(src).then(r => r.text()).then(html=> {
+        // 2. Inject the HTML into the overlay
+        //    We wrap it to keep the close button outside the fetched markup
+        content.innerHTML = html;
+        // 3. Show the overlay
+        overlay.classList.add('show');
+        overlay.classList.remove('hidden');
+        // 4. Request real full‑screen on the overlay container
+        requestFull(overlay);
+      }).catch(err => {
+        alert('Could not load the page.'); console.error(err);
+      });
+    }
+
+    // Close button → exit full‑screen
+    closeBtn.addEventListener('click', () => {
+      exitFull();
       overlay.classList.remove('show');
-      iframe.src = '';
+      overlay.classList.add('hidden');
+      content.innerHTML = ''; // clean up
     });
 
-    /* Attach click handlers to all fullscreen buttons */
+    // Also clean up if user exits full‑screen by pressing ESC or otherwise
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        overlay.classList.remove('show');
+        overlay.classList.add('hidden');
+        content.innerHTML = '';
+      }
+    });
+
+    // Attach handler to all full-screen buttons
     document.querySelectorAll('.fullScreenBtn').forEach(btn => {
       btn.addEventListener('click', () => openFullScreen(btn.dataset.src));
     });
+
+  })();
   </script>
 </body>
 </html>
