@@ -10,7 +10,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap"
+    rel="stylesheet">
 
   <style>
     body {
@@ -40,7 +42,6 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     }
 
-    /* Fade & glow effects */
     .fade-in {
       opacity: 0;
       transform: translateY(15px);
@@ -95,109 +96,45 @@
       background: #0f172a;
     }
 
-    /* === ULTRA-SLIM TRAIN ANIMATION === */
-    .train-container {
-      position: relative;
-      width: 100%;
-      height: 26px;
-      perspective: 1000px;
-      overflow: hidden;
-      background: linear-gradient(180deg,
-          #0f172a 0%,
-          #1e293b 80%,
-          #111827 100%);
-      border-radius: 0.75rem;
-      box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.3);
+    /* Floating chat icon */
+    #chatBtn {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 4rem;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1000;
     }
 
-    .train-track {
-      position: absolute;
-      bottom: 5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: repeating-linear-gradient(
-        90deg,
-        #60a5fa 0 20px,
-        transparent 20px 40px
-      );
-      animation: trackMove 1.5s linear infinite;
-    }
-
-    @keyframes trackMove {
-      from {
-        background-position-x: 0;
-      }
-
-      to {
-        background-position-x: 40px;
-      }
-    }
-
-    .train {
-      position: absolute;
-      bottom: 8px;
-      left: -150px;
+    /* Modal */
+    #modal {
+      position: fixed;
+      inset: 0;
       display: flex;
-      transform: rotateY(8deg);
-      animation: trainMove 9s linear infinite;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
     }
 
-    @keyframes trainMove {
-      0% {
-        left: -160px;
-      }
-
-      50% {
-        left: calc(100% - 100px);
-      }
-
-      100% {
-        left: -160px;
-      }
+    #modal.hidden {
+      display: none;
     }
 
-    .car {
-      width: 60px;
-      height: 15px;
-      background: linear-gradient(to bottom right,
-          #3b82f6,
-          #2563eb);
-      margin: 0 4px;
-      border-radius: 4px;
-      position: relative;
-      box-shadow: 0 3px 8px rgba(37, 99, 235, 0.4);
-      transform: skewX(-5deg);
+    #modal .content {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+      padding: 2rem;
+      color: #f1f5f9;
+      text-align: center;
+      max-width: 90%;
     }
 
-    .wheel {
-      position: absolute;
-      bottom: -4px;
-      width: 6px;
-      height: 6px;
-      background: #1e293b;
-      border: 2px solid #38bdf8;
-      border-radius: 50%;
-      animation: wheelSpin 0.5s linear infinite;
-    }
-
-    .wheel.left {
-      left: 5px;
-    }
-
-    .wheel.right {
-      right: 5px;
-    }
-
-    @keyframes wheelSpin {
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* MOBILE */
     @media (max-width: 640px) {
-
       h1 {
         font-size: 1.8rem;
       }
@@ -209,15 +146,6 @@
       iframe {
         height: 350px !important;
       }
-
-      .train-container {
-        height: 22px;
-      }
-
-      .car {
-        width: 50px;
-        height: 12px;
-      }
     }
   </style>
 </head>
@@ -225,87 +153,78 @@
 <body class="p-4 sm:p-6 space-y-8">
 
   <!-- HEADER -->
-  <header class="text-center fade-in mt-6">
+  <header class="text-center mt-6 fade-in">
     <h1 class="text-4xl sm:text-5xl font-bold text-blue-400 glow-text flex justify-center items-center space-x-2">
       <span>🏫</span>
-      <span style="font-family:'Pacifico', cursive;">ADITYA CAMPUS</span>
+      <span style="font-family:'Pacifico',cursive;">ADITYA CAMPUS</span>
       <span>🚀</span>
     </h1>
 
     <p class="text-slate-400 text-sm sm:text-base mt-3 moving-text">
-      💖 Your satisfaction and privacy are our priority. Thanks for trusting our app!
+      💖 Your satisfaction and privacy are our priority. Thanks for trusting our website!
     </p>
-    <p class="text-blue-300 text-base sm:text-lg mt-2 glow-text">
+
+    <p class="text-slate-400 text-sm sm:text-base mt-1 glow-text">
       Discover, Explore, and Experience ADITYA VERSE 💫
     </p>
   </header>
 
-  <!-- SECTION 1: ABOUT -->
-  <section id="about" class="w-full max-w-5xl glass p-6 fade-in relative">
-    <!-- Full‑screen button -->
-    <div class="absolute top-4 right-4 z-20 text-white text-xl font-bold cursor-pointer
-        bg-blue-600 rounded-full p-1"
-      onclick="openFullscreen('aditya_type_frontend.html')">
-      ⛶
+  <!-- OPTIONS -->
+  <main class="flex flex-col items-center w-full max-w-5xl">
+    <a href="about_aditya_campus.html" class="glass p-6 mb-6 w-full text-center text-blue-300 text-2xl font-semibold hover:opacity-90">
+      📘 About Aditya Campus
+    </a>
+
+    <a href="aditya_campus_streak.html" class="glass p-6 w-full text-center text-blue-300 text-2xl font-semibold hover:opacity-90">
+      🚆 Aditya Campus Streak
+    </a>
+  </main>
+
+  <!-- Floating chat icon -->
+  <button id="chatBtn">💬</button>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden">
+    <div class="content">
+      <p>🔐 Login or sign up with GitHub to give the feedback.</p>
+      <p>
+        📺 Or click the video link
+        <a href="https://archive.org/details/panfda" target="_blank" class="underline text-blue-400">
+          https://archive.org/details/panfda
+        </a>
+        to know how to give feedback.
+      </p>
+      <p class="mt-4 text-xl" id="countdown">5</p>
     </div>
-
-    <h2 class="text-2xl font-semibold text-blue-300 mb-4">📘 ABOUT</h2>
-    <iframe id="aboutIframe" src="aditya_type_frontend.html"
-      class="h-[450px] bg-slate-900">
-    </iframe>
-  </section>
-
-  <!-- SECTION 2: ADITYA VERSE DISPLAY + MINI TRAIN -->
-  <section id="aditya" class="w-full max-w-5xl glass p-6 fade-in relative">
-    <!-- Full‑screen button -->
-    <div class="absolute top-4 right-4 z-20 text-white text-xl font-bold cursor-pointer
-        bg-blue-600 rounded-full p-1"
-      onclick="openFullscreen('aditya_displaying_frontend.html')">
-      ⛶
-    </div>
-
-    <h2 class="text-2xl font-semibold text-blue-300 mb-4">🚆 Enjoy the Journey of ADITYA VERSE</h2>
-
-    <!-- Ultra‑Slim Train Animation -->
-    <div class="train-container mb-4">
-      <div class="train-track"></div>
-      <div class="train">
-        <div class="car">
-          <div class="wheel left"></div>
-          <div class="wheel right"></div>
-        </div>
-        <div class="car">
-          <div class="wheel left"></div>
-          <div class="wheel right"></div>
-        </div>
-        <div class="car">
-          <div class="wheel left"></div>
-          <div class="wheel right"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Embedded ADITYA Display -->
-    <iframe id="adityaIframe" src="aditya_displaying_frontend.html"
-      class="h-[500px] bg-slate-900">
-    </iframe>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer class="text-slate-500 text-sm mt-8 fade-in text-center pb-6">
-    <p>
-      © 2025 ADITYA CAMPUS · Built with ❤️ by <span
-        class="text-blue-400 font-semibold">YAN</span>
-    </p>
+    <p>© 2026 ADITYA CAMPUS · Built with ❤️ by <span class="text-blue-400 font-semibold">YAN</span></p>
   </footer>
 
-  <!-- JS -->
   <script>
-    // Navigate to the full‑screen page
-    function openFullscreen(url) {
-      window.location.href = url;
-    }
+    const chatBtn = document.getElementById('chatBtn');
+    const modal = document.getElementById('modal');
+    const countdownEl = document.getElementById('countdown');
+
+    chatBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      countdownEl.textContent = '5';
+
+      let counter = 5;
+      const interval = setInterval(() => {
+        counter--;
+        if (counter > 0) {
+          countdownEl.textContent = counter;
+        } else {
+          clearInterval(interval);
+          // close modal then redirect
+          modal.classList.add('hidden');
+          window.location.href = 'http://github.com/OpenThoughtVoice/OpenThoughtVoice/discussions/12';
+        }
+      }, 1000);
+    });
   </script>
 </body>
-
 </html>
