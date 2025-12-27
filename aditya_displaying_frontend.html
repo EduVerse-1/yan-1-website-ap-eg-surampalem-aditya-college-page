@@ -2,249 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>📚 Aditya Stream</title>
 
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-  * { box-sizing:border-box; margin:0; padding:0; }
-
-  body{
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    color:#fff;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding-bottom:40px;
-  }
-
-  header{
-    width:100%;
-    padding:16px;
-    text-align:center;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(12px);
-    box-shadow:0 4px 20px rgba(0,0,0,.3);
-    font-size:1.5em;
-    font-weight:600;
-    color:#60a5fa;
-    letter-spacing:1px;
-  }
-
-  #feed{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:16px;
-    width:92%;
-    max-width:1300px;
-    margin-top:24px;
-  }
-
-  .card{
-    background:rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:14px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .25s ease,box-shadow .25s ease;
-    position:relative;               /* for share‑icon positioning */
-  }
-
-  .card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 20px rgba(0,0,0,.4);
-  }
-
-  .preview{
-    width:100%;
-    aspect-ratio:16/9;
-    border-radius:12px;
-    overflow:hidden;
-    background:#1e293b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#94a3b8;
-    font-size:.9em;
-  }
-
-  .preview iframe{
-    width:100%;
-    height:100%;
-    border:none;
-  }
-
-  .info{
-    margin-top:10px;
-  }
-
-  .title{
-    font-size:1em;
-    font-weight:600;
-    color:#f8fafc;
-    margin-bottom:4px;
-    line-height:1.4;
-    word-break:break-word;
-  }
-
-  .meta{
-    font-size:.85em;
-    color:#94a3b8;
-    word-break:break-word;
-  }
-
-  .description{
-    font-size:.85em;
-    color:#94a3b8;
-    margin-top:4px;
-  }
-
-  .link a{
-    color:#60a5fa;
-    text-decoration:underline;
-    word-break:break-all;
-  }
-
-  .open-btn{
-    margin-top:10px;
-    background:#60a5fa;
-    color:#fff;
-    border:none;
-    border-radius:8px;
-    padding:10px;
-    font-weight:500;
-    cursor:pointer;
-    transition:background .25s ease;
-    font-size:.95em;
-  }
-
+  *, *::before, *::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:40px;}
+  header{width:100%;padding:16px;text-align:center;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,.3);font-size:1.5em;font-weight:600;color:#60a5fa;letter-spacing:1px;}
+  #feed{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;width:92%;max-width:1300px;margin-top:24px;}
+  .card{background:rgba(255,255,255,.08);border-radius:16px;padding:14px;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;position:relative;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+  .preview{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#1e293b;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.9em;}
+  .preview iframe{width:100%;height:100%;border:none;}
+  .info{margin-top:10px;}
+  .title{font-size:1em;font-weight:600;color:#f8fafc;margin-bottom:4px;line-height:1.4;word-break:break-word;}
+  .meta{font-size:.85em;color:#94a3b8;word-break:break-word;}
+  .description{font-size:.85em;color:#94a3b8;margin-top:4px;}
+  .link a{color:#60a5fa;text-decoration:underline;word-break:break-all;}
+  .open-btn{margin-top:10px;background:#60a5fa;color:#fff;border:none;border-radius:8px;padding:10px;font-weight:500;cursor:pointer;transition:background .25s ease;font-size:.95em;}
   .open-btn:hover{background:#3b82f6;}
-
-  .share-icon{
-    position:absolute;
-    top:8px; right:8px;
-    font-size:1.2rem;               /* very small */
-    opacity:.7;
-    cursor:pointer;
-    transition:opacity .2s;
-    user-select:none;
-  }
+  .share-icon{position:absolute;top:8px;right:8px;font-size:1.2rem;opacity:.7;cursor:pointer;transition:opacity .2s;user-select:none;}
   .share-icon:hover{opacity:1;}
-
-  footer{
-    margin-top:30px;
-    color:#94a3b8;
-    font-size:.9em;
-    text-align:center;
-  }
-
-  .loader{
-    margin-top:60px;
-    border:6px solid rgba(255,255,255,.2);
-    border-top:6px solid #60a5fa;
-    border-radius:50%;
-    width:45px;
-    height:45px;
-    animation:spin 1s linear infinite;
-  }
-
-  @keyframes spin{
-    0%{transform:rotate(0deg);}
-    100%{transform:rotate(360deg);}
-  }
-
-  .pdf-viewer{
-    position:fixed;
-    top:0; left:0;
-    width:100vw;
-    height:100vh;
-    background:#0f172a;
-    z-index:999;
-    display:none;
-    flex-direction:column;
-  }
+  footer{margin-top:30px;color:#94a3b8;font-size:.9em;text-align:center;}
+  .loader{margin-top:60px;border:6px solid rgba(255,255,255,.2);border-top:6px solid #60a5fa;border-radius:50%;width:45px;height:45px;animation:spin 1s linear infinite;}
+  @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  .pdf-viewer{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0f172a;z-index:999;display:none;flex-direction:column;}
   .pdf-viewer.active{display:flex;}
-
-  .pdf-toolbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 14px;
-    background:rgba(15,23,42,.9);
-    border-bottom:1px solid rgba(255,255,255,.1);
-  }
-  .pdf-toolbar h2{
-    font-size:1em;
-    color:#93c5fd;
-    font-weight:500;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    max-width:80%;
-  }
-  .close-full{
-    background:#ef4444;
-    border:none;
-    color:#fff;
-    font-size:1.2em;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    cursor:pointer;
-    transition:background .25s ease;
-  }
+  .pdf-toolbar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(15,23,42,.9);border-bottom:1px solid rgba(255,255,255,.1);}
+  .pdf-toolbar h2{font-size:1em;color:#93c5fd;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80%;}
+  .close-full{background:#ef4444;border:none;color:#fff;font-size:1.2em;width:36px;height:36px;border-radius:50%;cursor:pointer;transition:background .25s ease;}
   .close-full:hover{background:#dc2626;}
-  .pdf-iframe{
-    flex-grow:1;
-    border:none;
-    width:100%;
-    height:100%;
-  }
-
-  @media(max-width:768px){
-    header{font-size:1.3em;padding:12px;}
-    .open-btn{font-size:.9em;padding:8px;}
-    .meta{font-size:.8em;}
-  }
-  @media(max-width:480px){
-    #feed{width:96%;gap:12px;}
-    .card{padding:10px;}
-    .preview{aspect-ratio:4/3;}
-    .title{font-size:.95em;}
-    .pdf-toolbar h2{font-size:.9em;}
-    .close-full{width:32px;height:32px;font-size:1em;}
-  }
+  .pdf-iframe{flex-grow:1;border:none;width:100%;height:100%;}
+  @media(max-width:768px){header{font-size:1.3em;padding:12px;} .open-btn{font-size:.9em;padding:8px;} .meta{font-size:.8em;}}
+  @media(max-width:480px){#feed{width:96%;gap:12px;} .card{padding:10px;} .preview{aspect-ratio:4/3;} .title{font-size:.95em;} .pdf-toolbar h2{font-size:.9em;} .close-full{width:32px;height:32px;font-size:1em;}}
 </style>
 </head>
 
 <body>
-  <header>📚 Aditya Stream</header>
+<header>📚 Aditya Stream</header>
 
-  <div id="feed"></div>
-  <div id="loader" class="loader"></div>
+<div id="feed"></div>
+<div id="loader" class="loader"></div>
 
-  <footer>Powered by Archive &amp; Your Backend</footer>
+<footer>Powered by Archive & Your Backend</footer>
 
-  <!-- Fullscreen PDF / embedded viewer -->
-  <div id="pdfViewer" class="pdf-viewer">
-    <div class="pdf-toolbar">
-      <h2 id="pdfTitle">Viewer</h2>
-      <button class="close-full" id="closeViewer">&times;</button>
-    </div>
-    <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
+<!-- Fullscreen PDF / embedded viewer -->
+<div id="pdfViewer" class="pdf-viewer">
+  <div class="pdf-toolbar">
+    <h2 id="pdfTitle">Viewer</h2>
+    <button class="close-full" id="closeViewer">&times;</button>
   </div>
+  <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
+</div>
 
 <script>
 /* ----------------------- CONFIG ----------------------- */
-const BACKEND_URL   = 'https://aditya_displaying_backend.csethre.workers.dev';
-const SHARE_BASE_URL = 'https://yan-1-related-1.github.io/yan-1-website-shared-links-redirecting/ap-eg-surampalem-aditya-campus-streak-page-shared-links-redirecting.html';
+const BACKEND_URL     = 'https://aditya_displaying_backend.csethre.workers.dev';
+const SHARE_BASE_URL  = 'https://yan-1-related-1.github.io/yan-1-website-shared-links-redirecting/ap-eg-surampalem-aditya-campus-streak-page-shared-links-redirecting.html';
 
-let allData = [];                 // whole data set from backend
+let allData = [];                 // the entire data set from backend
 const FEED   = document.getElementById('feed');
 const LOADER = document.getElementById('loader');
 
@@ -273,30 +91,41 @@ function getArchiveId(archiveUrl){
   if (!archiveUrl) return null;
   const parts = archiveUrl.split('/details/');
   if (parts.length < 2) return null;
-  return parts[1].split(/[\/?#]/)[0];
+  return parts[1].split(/[\\/?#]/)[0];
 }
 
 /* fetch description from archive.org metadata endpoint */
 async function fetchDescription(item, el){
   const id = getArchiveId(item.archive_url);
   if (!id){
-    el.textContent = '';
+    el.textContent = 'Description not available.';
     return;
   }
   try{
     const resp = await fetch(`https://archive.org/metadata/${id}`);
     const data = await resp.json();
     let desc = '';
-    if (data?.metadata?.description){
-      if (Array.isArray(data.metadata.description))
-        desc = data.metadata.description.join(' ');
-      else
-        desc = data.metadata.description;
+    const raw = data?.metadata?.description;
+    if (raw){
+      desc = Array.isArray(raw) ? raw.join(' ') : raw;
+    }
+    if (!desc){
+      el.textContent = 'Description not available.';
+      return;
+    }
+    // Strip any HTML tags
+    desc = desc.replace(/<[^>]*>/g, ' ');
+    // Collapse consecutive whitespace
+    desc = desc.replace(/\s+/g, ' ').trim();
+    // Truncate if too long (adjust maxLen as desired)
+    const maxLen = 300;
+    if (desc.length > maxLen){
+      desc = desc.slice(0, maxLen).trim() + '…';
     }
     el.textContent = desc;
   }catch(e){
     console.warn('Failed to get description for', id, e);
-    el.textContent = '';
+    el.textContent = 'Description not available.';
   }
 }
 
@@ -404,7 +233,6 @@ function handleSharedLink(){
   const tryFocus = () => {
     const card = document.getElementById(gridId);
     if (!card){
-      // maybe not rendered yet – try again shortly
       setTimeout(tryFocus, 200);
       return;
     }
@@ -412,7 +240,6 @@ function handleSharedLink(){
     const openBtn = card.querySelector('.open-btn');
     if (openBtn) openBtn.click();
   };
-  // give the DOM a moment after rendering
   setTimeout(tryFocus, 300);
 }
 
