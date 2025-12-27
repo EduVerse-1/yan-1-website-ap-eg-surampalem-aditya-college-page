@@ -1,213 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📚 Aditya Stream</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>📚 Aditya Stream</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 40px;
-    }
+  body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:#fff;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-bottom:40px;
+  }
 
-    header {
-      width: 100%;
-      padding: 16px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      font-size: 1.5em;
-      font-weight: 600;
-      color: #60a5fa;
-      letter-spacing: 1px;
-    }
+  header{
+    width:100%;
+    padding:16px;
+    text-align:center;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    box-shadow:0 4px 20px rgba(0,0,0,.3);
+    font-size:1.5em;
+    font-weight:600;
+    color:#60a5fa;
+    letter-spacing:1px;
+  }
 
-    #feed {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      width: 92%;
-      max-width: 1300px;
-      margin-top: 24px;
-    }
+  #feed{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
+    width:92%;
+    max-width:1300px;
+    margin-top:24px;
+  }
 
-    .card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
+  .card{
+    background:rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    transition:transform .25s ease,box-shadow .25s ease;
+    position:relative;               /* for share‑icon positioning */
+  }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+  }
 
-    .preview {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #1e293b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #94a3b8;
-      font-size: 0.9em;
-    }
+  .preview{
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:12px;
+    overflow:hidden;
+    background:#1e293b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#94a3b8;
+    font-size:.9em;
+  }
 
-    .preview iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+  .preview iframe{
+    width:100%;
+    height:100%;
+    border:none;
+  }
 
-    .info { margin-top: 10px; }
+  .info{
+    margin-top:10px;
+  }
 
-    .title {
-      font-size: 1em;
-      font-weight: 600;
-      color: #f8fafc;
-      margin-bottom: 4px;
-      line-height: 1.4;
-      word-break: break-word;
-    }
+  .title{
+    font-size:1em;
+    font-weight:600;
+    color:#f8fafc;
+    margin-bottom:4px;
+    line-height:1.4;
+    word-break:break-word;
+  }
 
-    .meta {
-      font-size: 0.85em;
-      color: #94a3b8;
-      word-break: break-word;
-    }
+  .meta{
+    font-size:.85em;
+    color:#94a3b8;
+    word-break:break-word;
+  }
 
-    .open-btn {
-      margin-top: 10px;
-      background: #60a5fa;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.25s ease;
-      font-size: 0.95em;
-    }
+  .description{
+    font-size:.85em;
+    color:#94a3b8;
+    margin-top:4px;
+  }
 
-    .open-btn:hover { background: #3b82f6; }
+  .link a{
+    color:#60a5fa;
+    text-decoration:underline;
+    word-break:break-all;
+  }
 
-    footer {
-      margin-top: 30px;
-      color: #94a3b8;
-      font-size: 0.9em;
-      text-align: center;
-    }
+  .open-btn{
+    margin-top:10px;
+    background:#60a5fa;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .25s ease;
+    font-size:.95em;
+  }
 
-    .loader {
-      margin-top: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.2);
-      border-top: 6px solid #60a5fa;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      animation: spin 1s linear infinite;
-    }
+  .open-btn:hover{background:#3b82f6;}
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+  .share-icon{
+    position:absolute;
+    top:8px; right:8px;
+    font-size:1.2rem;               /* very small */
+    opacity:.7;
+    cursor:pointer;
+    transition:opacity .2s;
+    user-select:none;
+  }
+  .share-icon:hover{opacity:1;}
 
-    .pdf-viewer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #0f172a;
-      z-index: 999;
-      display: none;
-      flex-direction: column;
-    }
+  footer{
+    margin-top:30px;
+    color:#94a3b8;
+    font-size:.9em;
+    text-align:center;
+  }
 
-    .pdf-viewer.active { display: flex; }
+  .loader{
+    margin-top:60px;
+    border:6px solid rgba(255,255,255,.2);
+    border-top:6px solid #60a5fa;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    animation:spin 1s linear infinite;
+  }
 
-    .pdf-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+  @keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+  }
 
-    .pdf-toolbar h2 {
-      font-size: 1em;
-      color: #93c5fd;
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 80%;
-    }
+  .pdf-viewer{
+    position:fixed;
+    top:0; left:0;
+    width:100vw;
+    height:100vh;
+    background:#0f172a;
+    z-index:999;
+    display:none;
+    flex-direction:column;
+  }
+  .pdf-viewer.active{display:flex;}
 
-    .close-full {
-      background: #ef4444;
-      border: none;
-      color: white;
-      font-size: 1.2em;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.25s ease;
-    }
+  .pdf-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 14px;
+    background:rgba(15,23,42,.9);
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .pdf-toolbar h2{
+    font-size:1em;
+    color:#93c5fd;
+    font-weight:500;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    max-width:80%;
+  }
+  .close-full{
+    background:#ef4444;
+    border:none;
+    color:#fff;
+    font-size:1.2em;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:background .25s ease;
+  }
+  .close-full:hover{background:#dc2626;}
+  .pdf-iframe{
+    flex-grow:1;
+    border:none;
+    width:100%;
+    height:100%;
+  }
 
-    .close-full:hover { background: #dc2626; }
-
-    .pdf-iframe {
-      flex-grow: 1;
-      border: none;
-      width: 100%;
-      height: 100%;
-    }
-
-    @media (max-width: 768px) {
-      header { font-size: 1.3em; padding: 12px; }
-      .open-btn { font-size: 0.9em; padding: 8px; }
-      .meta { font-size: 0.8em; }
-    }
-
-    @media (max-width: 480px) {
-      #feed { width: 96%; gap: 12px; }
-      .card { padding: 10px; }
-      .preview { aspect-ratio: 4/3; }
-      .title { font-size: 0.95em; }
-      .pdf-toolbar h2 { font-size: 0.9em; }
-      .close-full { width: 32px; height: 32px; font-size: 1em; }
-    }
-  </style>
+  @media(max-width:768px){
+    header{font-size:1.3em;padding:12px;}
+    .open-btn{font-size:.9em;padding:8px;}
+    .meta{font-size:.8em;}
+  }
+  @media(max-width:480px){
+    #feed{width:96%;gap:12px;}
+    .card{padding:10px;}
+    .preview{aspect-ratio:4/3;}
+    .title{font-size:.95em;}
+    .pdf-toolbar h2{font-size:.9em;}
+    .close-full{width:32px;height:32px;font-size:1em;}
+  }
+</style>
 </head>
 
 <body>
   <header>📚 Aditya Stream</header>
+
   <div id="feed"></div>
   <div id="loader" class="loader"></div>
-  <footer>Powered by Archive & Your Backend</footer>
 
+  <footer>Powered by Archive &amp; Your Backend</footer>
+
+  <!-- Fullscreen PDF / embedded viewer -->
   <div id="pdfViewer" class="pdf-viewer">
     <div class="pdf-toolbar">
       <h2 id="pdfTitle">Viewer</h2>
@@ -216,112 +239,209 @@
     <iframe id="pdfFrame" class="pdf-iframe" src=""></iframe>
   </div>
 
-  <script>
-    const FEED = document.getElementById('feed');
-    const LOADER = document.getElementById('loader');
-    const VIEWER = document.getElementById('pdfViewer');
-    const PDF_FRAME = document.getElementById('pdfFrame');
-    const PDF_TITLE = document.getElementById('pdfTitle');
-    const CLOSE_VIEWER = document.getElementById('closeViewer');
+<script>
+/* ----------------------- CONFIG ----------------------- */
+const BACKEND_URL   = 'https://aditya_displaying_backend.csethre.workers.dev';
+const SHARE_BASE_URL = 'https://yan-1-related-1.github.io/yan-1-website-shared-links-redirecting/ap-eg-surampalem-aditya-campus-streak-page-shared-links-redirecting.html';
 
-    const BACKEND_URL = 'https://aditya_displaying_backend.csethre.workers.dev';
+let allData = [];                 // whole data set from backend
+const FEED   = document.getElementById('feed');
+const LOADER = document.getElementById('loader');
 
-    let allData = [];
-    let currentIndex = 0;
-    const ITEMS_PER_PAGE = 30;
-    let loadingMore = false;
+/* ---------------------- VIEWER ---------------------- */
+const VIEWER  = document.getElementById('pdfViewer');
+const FRAME   = document.getElementById('pdfFrame');
+const TITLE   = document.getElementById('pdfTitle');
+const CLOSE   = document.getElementById('closeViewer');
 
-    async function fetchData() {
-      try {
-        const res = await fetch(BACKEND_URL);
-        const data = await res.json();
-        LOADER.style.display = 'none';
+function openFullscreenPDF(title, url){
+  if (!url) return;
+  const embed = url.includes('archive.org')
+                ? url.replace('/details/','/embed/')
+                : url;
+  TITLE.textContent = title || 'Viewer';
+  FRAME.src = embed;
+  VIEWER.classList.add('active');
+}
+CLOSE.onclick = () => {
+  VIEWER.classList.remove('active');
+  FRAME.src = '';
+};
 
-        if (!data || data.length === 0) {
-          FEED.innerHTML = "<p style='text-align:center;color:#94a3b8'>No Data Found 😢</p>";
-          return;
-        }
+/* -------------------- HELPERS -------------------- */
+function getArchiveId(archiveUrl){
+  if (!archiveUrl) return null;
+  const parts = archiveUrl.split('/details/');
+  if (parts.length < 2) return null;
+  return parts[1].split(/[\/?#]/)[0];
+}
 
-        allData = data;
-        loadNextBatch();
-      } catch (err) {
-        LOADER.style.display = 'none';
-        FEED.innerHTML = `<p style='text-align:center;color:#f87171'>Error loading data 😞</p>`;
-        console.error(err);
-      }
+/* fetch description from archive.org metadata endpoint */
+async function fetchDescription(item, el){
+  const id = getArchiveId(item.archive_url);
+  if (!id){
+    el.textContent = '';
+    return;
+  }
+  try{
+    const resp = await fetch(`https://archive.org/metadata/${id}`);
+    const data = await resp.json();
+    let desc = '';
+    if (data?.metadata?.description){
+      if (Array.isArray(data.metadata.description))
+        desc = data.metadata.description.join(' ');
+      else
+        desc = data.metadata.description;
     }
+    el.textContent = desc;
+  }catch(e){
+    console.warn('Failed to get description for', id, e);
+    el.textContent = '';
+  }
+}
 
-    function loadNextBatch() {
-      if (loadingMore) return;
-      loadingMore = true;
+/* share card */
+function shareCard(cardId){
+  const url = `${SHARE_BASE_URL}?grid_id=${cardId}`;
+  if (navigator.share){
+    navigator.share({title:'Check this archive', url})
+      .catch(err=>console.warn('Web Share failed:',err));
+  }else{
+    navigator.clipboard.writeText(url)
+      .then(()=>alert('Share link copied to clipboard'))
+      .catch(()=>alert('Unable to copy link'));
+  }
+}
 
-      const nextItems = allData.slice(currentIndex, currentIndex + ITEMS_PER_PAGE);
-      nextItems.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
+/* ------------------- CARD BUILDING ------------------- */
+function createCard(item){
+  const card = document.createElement('div');
+  card.className = 'card';
+  const cardId = `grid_${item.id}`;
+  card.id = cardId;
+  card.dataset.type = (item.type||'').toLowerCase();
 
-        const preview = document.createElement('div');
-        preview.className = 'preview';
+  /* share icon */
+  const shareIcon = document.createElement('span');
+  shareIcon.className = 'share-icon';
+  shareIcon.title = 'Share';
+  shareIcon.textContent = '🔗';
+  shareIcon.onclick = () => shareCard(cardId);
 
-        if (item.archive_url && item.archive_url.includes('archive.org')) {
-          const embedUrl = item.archive_url.replace('/details/', '/embed/');
-          preview.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
-        } else {
-          preview.textContent = 'No Preview Available';
-        }
+  /* preview (iframe embed if archive) */
+  const preview = document.createElement('div');
+  preview.className = 'preview';
+  if (item.archive_url && item.archive_url.includes('archive.org')){
+    const embed = item.archive_url.replace('/details/','/embed/');
+    preview.innerHTML = `<iframe src="${embed}" allowfullscreen></iframe>`;
+  }else{
+    preview.textContent = 'No preview available';
+  }
 
-        const info = document.createElement('div');
-        info.className = 'info';
-        info.innerHTML = `
-          <div class="title">${item.title || 'Untitled'}</div>
-          <div class="meta">🆔 ${item.id || 'N/A'}</div>
-        `;
+  /* info block */
+  const info = document.createElement('div');
+  info.className = 'info';
 
-        const openBtn = document.createElement('button');
-        openBtn.className = 'open-btn';
-        openBtn.textContent = 'Open';
-        openBtn.onclick = () => openFullscreenPDF(item.title, item.archive_url);
+  const titleEl = document.createElement('div');
+  titleEl.className = 'title';
+  titleEl.textContent = item.title || 'Untitled';
 
-        card.append(preview, info, openBtn);
-        FEED.appendChild(card);
-      });
+  const metaEl = document.createElement('div');
+  metaEl.className = 'meta';
+  metaEl.textContent = `🆔 ${item.id ?? 'N/A'}`;
 
-      currentIndex += ITEMS_PER_PAGE;
-      loadingMore = false;
+  const descEl = document.createElement('div');
+  descEl.className = 'description';
+  descEl.textContent = 'Loading description…';
+
+  info.appendChild(titleEl);
+  info.appendChild(metaEl);
+  info.appendChild(descEl);
+
+  /* optional external link */
+  if (item.link){
+    const linkDiv = document.createElement('div');
+    linkDiv.className = 'link';
+    const a = document.createElement('a');
+    a.href = item.link;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = item.link;
+    linkDiv.appendChild(a);
+    info.appendChild(linkDiv);
+  }
+
+  /* open button */
+  const openBtn = document.createElement('button');
+  openBtn.className = 'open-btn';
+  openBtn.textContent = 'Open';
+  openBtn.onclick = () => openFullscreenPDF(item.title, item.archive_url);
+
+  /* assemble card */
+  card.append(preview, info, openBtn, shareIcon);
+
+  /* async description fetch */
+  fetchDescription(item, descEl);
+
+  return card;
+}
+
+/* ------------------- RENDER ALL ------------------- */
+function renderAll(){
+  FEED.innerHTML = '';
+  allData.forEach(item => {
+    const card = createCard(item);
+    FEED.appendChild(card);
+  });
+}
+
+/* ------------------- SHARED LINK HANDLER ------------------- */
+function handleSharedLink(){
+  const params = new URLSearchParams(window.location.search);
+  const gridId = params.get('grid_id');
+  if (!gridId) return;
+
+  const tryFocus = () => {
+    const card = document.getElementById(gridId);
+    if (!card){
+      // maybe not rendered yet – try again shortly
+      setTimeout(tryFocus, 200);
+      return;
     }
+    card.scrollIntoView({behavior:'smooth',block:'center'});
+    const openBtn = card.querySelector('.open-btn');
+    if (openBtn) openBtn.click();
+  };
+  // give the DOM a moment after rendering
+  setTimeout(tryFocus, 300);
+}
 
-    function openFullscreenPDF(title, url) {
-      if (!url) return;
-      const embedUrl = url.includes('archive.org')
-        ? url.replace('/details/', '/embed/')
-        : url;
-      PDF_TITLE.textContent = title || 'Viewer';
-      PDF_FRAME.src = embedUrl;
-      VIEWER.classList.add('active');
-    }
+/* ------------------- FETCH DATA ------------------- */
+async function loadData(){
+  try{
+    const resp = await fetch(BACKEND_URL);
+    const data = await resp.json();
+    allData = data;
+    renderAll();
+    LOADER.style.display = 'none';
+    handleSharedLink();
+  }catch(err){
+    console.error('Error fetching backend data', err);
+    LOADER.style.display = 'none';
+    FEED.innerHTML = "<p style='text-align:center;color:#f87171'>Error loading data 😞</p>";
+  }
+}
 
-    CLOSE_VIEWER.onclick = () => {
-      VIEWER.classList.remove('active');
-      PDF_FRAME.src = '';
-    };
+/* ------------------- START ------------------- */
+loadData();
 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        VIEWER.classList.remove('active');
-        PDF_FRAME.src = '';
-      }
-    });
-
-    // Infinite scroll listener
-    window.addEventListener('scroll', () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-        if (currentIndex < allData.length) {
-          loadNextBatch();
-        }
-      }
-    });
-
-    fetchData();
-  </script>
+/* ---- OPTIONAL: keep ESC key to close viewer ---- */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && VIEWER.classList.contains('active')){
+    VIEWER.classList.remove('active');
+    FRAME.src = '';
+  }
+});
+</script>
 </body>
 </html>
